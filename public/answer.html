@@ -1,0 +1,57 @@
+<div class="contentleft">
+
+    <div class="maincontent">
+        <h2 class="feed-title">
+            {{allresults[0].db_zhihu_ques_title}} </h2>
+        <!--  用户头像小图标区域结束-->
+        <div class="detail-wrapper" ng-repeat="x in allresults">
+        <div class="feedmain">
+            <!--回答者姓名简介-->
+            <div class="answer-author-info">
+                <a class="author-link" href="#">{{x.db_zhihu_user_name}}</a><span class="bio"> CS
+                    PhD@UW / </span>
+            </div>
+            <div class="feedcontent">
+                <div class="entry-body">
+                    <!--  回答内容-->
+                    <div class="zm-item-rich-text expandable">
+                        <div class="zh-summary"><span class="zh-summary-span">{{x.short}}</span></b>
+                            <button type="button" onClick="showdiv(this);" class="toggle-expand button content-more">显示全部</button>
+                        </div>
+                        <div class="zh-full"><span>{{x.db_zhihu_answ_content}}</span></b>
+                            </b>
+                            <button href="javascript:;" class="button collaspetext" onClick="hidediv(this);">收起全文</button>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="item-actions">
+            <a class="js-vote-count" ng-click="approData(x)">{{x.appro_num}}</a>
+            <a class="devote" ng-click="approData(x)">-</a>
+            <a ng-click="disscuData(x)">评论</a>
+            <a ng-click="collectData(x)">收藏</a>
+        </div>
+        <!--<div ng-if>评论部分——隐藏——显示</div>-->
+        <div ng-show="x.arrow===1" class="discuss">
+            <strong class="comment_topbar">共<span>{{x.commentarray.length}}</span>条评论</strong>
+            <div ng-repeat="c in x.commentarray" class="comment"><!--这里用ng-repeat-->
+                <div>
+                    <span class="commentusername">{{c.firstName}}</span><span> 回复：</span>
+                    <span ng-show="c.secondName!==null"  class="commentusername">{{c.secondName}} </span>{{c.firstContem}}
+                    <a class="addcommentinput" ng-click="discuss_sec_data(c,$event)">评论</a>
+                </div>
+                <div ng-show="c.discuss_sec===1">
+                    <input type="text" placeholder="回复：{{c.firstName}}">
+                    <a ng-click="postComment([x,c],$event)">评论</a>
+                    <a ng-click="undiscuss_sec(c)">取消</a>
+                </div>
+            </div>
+            <div><input type="text" class="postcomment"><a class="" ng-click="postComment([x],$event)">评论</a></div>
+        </div>
+
+    </div>
+    </div>
+</div>

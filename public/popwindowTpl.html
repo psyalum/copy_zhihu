@@ -1,0 +1,24 @@
+<div id="fade" class="black_overlay">
+    <div id="MyDiv" class="white_content">
+        <a ng-click="collaspwindow()">×</a>
+        <div style="cursor: default; height: 40px;" id="move">
+            <h2 class="postQues">写下你的问题</h2>
+            <form style="text-align: center; ">
+                <div class="ques-inputs">
+                    <div>
+                        <input class="ques_title" type="text" ng-model="ques.title" placeholder="问题 标题" required>
+                    </div>
+                    <div>
+                        <textarea class="ques_content" type="text" ng-model="ques.content"
+                                  placeholder="请详细的描述问题"></textarea>
+                    </div>
+
+                </div>
+                <div class="button-wrapper command">
+                    <button class="postques" type="submit">取消</button>
+                    <button class="postques" ng-click="postQues()" type="submit">提交</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

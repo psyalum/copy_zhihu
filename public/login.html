@@ -1,0 +1,16 @@
+<div class="view view-signin selected">
+    <form>
+        <div class="group-inputs">
+            <div class="account input-wrapper">
+                <input type="text" name="account" ng-model="user.name" placeholder="手机号或邮箱" required>
+            </div>
+            <div class="verification input-wrapper">
+                <input type="password" name="password" ng-model="user.pwd" placeholder="密码" required>
+                <button type="button" class="send-code-button">获取验证码</button>
+            </div>
+        </div>
+        <div class="button-wrapper command">
+            <button class="sign-button submit" ng-click="subLogin(user)" type="submit">登录</button>
+        </div>
+    </form>
+</div>

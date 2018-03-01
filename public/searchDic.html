@@ -1,0 +1,22 @@
+<div class="navbar-left top-search">
+    <form  class="input-group top-search-form">
+    <input type="text" ng-model="userSearch" ng-focus="focusbar()" ng-blur="closeContent()" class="top-search-input form-control" placeholder="家具"/>
+    <!--<input type="text" ng-model="userSearch"-->
+           <!--ng-blur="closeContent()" ng-keydown="changeSearchVal()"-->
+           <!--placeholder="家具"/>-->
+        <span class="input-group-addon glyphicon glyphicon-search"ng-mousedown="goSearchState(userSearch)"></span>
+    </form>
+    <!--下面这部分是做搜索定时显示的 -->
+    <div ng-show="searchResultList.length" class="search_list">
+        <ul>
+            <li ng-repeat="item in searchResultList track by $index  ">
+                <!--{{item.title}}-->
+                <!--上面的需要数组去重，自定义过滤器//而且重复输入第二次会报错-->
+                <a ng-click="getDetail(item)">
+                    {{item.title}}
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>
+

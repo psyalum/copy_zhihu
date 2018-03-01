@@ -1,0 +1,125 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+a{
+    color: darkslateblue;
+    text-decoration: none;
+}
+.index-main-body {
+    text-align: left;
+    width: 300px;
+    margin: 0 auto;
+    background-color: white;
+    vertical-align: middle;
+    line-height: 25.5px;
+}
+
+.subtitle {
+    font-size: 18px;
+    text-align: center;
+    margin-top: 30px;
+    margin-bottom: 20px;
+}
+
+.logo {
+    width: 160px;
+    height: 74px;
+    margin: 0 auto;
+    background-image: url(../img/logo.6837e927.png);
+    background-repeat: no-repeat;
+
+}
+
+.index-tab-navs {
+    margin-bottom: 10px;
+    font-size: 18px;
+    text-align: center;
+}
+
+.navs-slider {
+    position: relative;
+    display: inline-block;
+}
+.navs-slider a{
+    width: 72px;
+    display: inline-block;
+}
+.active {
+    opacity: 1;
+    color: blue;
+    display: inline-block;
+    width: 72px;
+}
+.navs-slider-bar {
+    position: absolute;
+    left: 4.2em;
+    bottom: 0;
+    width: 2.4em;
+    margin: 0 0.8em;
+    height: 2px;
+    background: #0f88eb;
+    transition-property: left;
+    transition-duration: 0.15s;
+    transition-timing-function: ease-in;
+    transition-delay: initial;
+}
+.signin-bar{
+    left:4.2em;
+}
+.signup-bar{
+    left:0em;
+}
+
+.group-inputs {
+    padding: 1px 0;
+    border: 1px solid #d5d5d5;
+    border-radius: 3px;
+}
+
+.input-wrapper {
+    position: relative;
+    margin: 0;
+    overflow: hidden;
+    width: 100%;
+    height: 47px;
+}
+
+.input-wrapper input {
+    display: inline-block;
+    width: 100%;
+    height: 19px;
+    padding: 14px 11px;
+}
+
+.sign-button {
+    background-color: blue;
+    border-radius: 3px;
+    line-height: 41px;
+    color: white;
+    width: 300px;
+}
+
+.button-wrapper {
+    margin-top: 18px;
+}
+
+.agreement-tip {
+    margin-top: 21px;
+    font-size: 13px;
+    color: #999;
+    text-align: center;
+}
+.signin-switch-button{
+    padding: 0;
+    font-size: 14px;
+    color:#5ca5e8;
+    background:transparent;
+    border: 0;
+    cursor: pointer;
+    outline: 0;
+}
+.unable-login{
+    float: right;
+    color: inherit;
+}

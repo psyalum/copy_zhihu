@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>知乎首页</title>
+    <link rel="stylesheet" href="stylesheets/index.css">
+    <script src="http://cdn.static.runoob.com/libs/angular.js/1.4.6/angular.min.js"></script>
+    <script src="https://code.angularjs.org/1.4.6/angular-cookies.js"></script>
+    <script src="javascripts/jquery-3.2.1.min.js"></script>
+
+</head>
+<body ng-app="zhuye" ng-controller="profileCtrl">
+<a href="javascript:;" id="back-to-top" title="回到顶部"></a>
+<!--若a链接中href为#，则每次点击就会跳回顶部-->
+<div class="top">
+    <!--top代表的是全部头部导航栏；-->
+    <div class="top-wrap">
+        <!--.top-wrap这里填计算机的屏幕宽度，然后下面的margin选择auto即自适应、居中。这里最好给它选个一个公共的宽度，因为下面的div也会用到；-->
+        <a class="top-link-logo hide-text" href="javascripts:;" ng-click="returnIndex()">知乎</a>
+        <div class="top-search">
+            <form class="top-search-form" id="top-search-form">
+                <input type="text" id="top-search-input" class="top-search-input" autocomplete="off" value="" placeholder="搜索你感兴趣的内容..."/>
+                <button type="submit" class="top-search-button" ng-click="searchData()"><span class="hide-text">搜索</span><span
+                        class="sprite-global-icon-magnifier-dark"></span></button>
+                <!--.sprite-global-icon-magnifier-dark里display:inline-block;这句必须加不然不显示-->
+            </form>
+        </div>
+        <div class="hisrecord" id="hisrecord"></div>
+        <div class="auto_hidden" id="auto">
+            <!--自动完成 DIV-->
+        </div>
+        <div class="top-nav">
+            <ul class="top-nav-ul">
+                <li class="top-nav-li">
+                    <a class="top-nav-link" href="javascripts:;" ng-click="returnIndex()">首页</a>
+                </li>
+                <li class="top-nav-li">
+                    <a class="top-nav-link" href="#">话题</a>
+                </li>
+                <li class="top-nav-li">
+                    <a class="top-nav-link" href="#">发现</a>
+                </li>
+                <li class="top-nav-li open">
+                    <a class="top-nav-link" href="#" role="button"><span class="mobi-arrow"></span>消息</a>
+                    <!--<div class="top-nav-live">-->
+                    <!--<div class="top-nav-live-inner">-->
+                    <!--<div class="top-live-icon">&nbsp;</div>-->
+                    <!--<div class="top-message-container clearfix">-->
+                    <!--<button class="top-message-tab-item message"><span class="icon icon1">消息</span></button>-->
+                    <!--<button class="top-message-tab-item user"><span class="icon icon2">用户</span></button>-->
+                    <!--<button class="top-message-tab-item thanks"><span class="icon icon3">赞同和感谢</span>-->
+                    <!--</button>-->
+                    <!--</div>-->
+                    <!--<div class="frame-border top"></div>-->
+                    <!--<div class="zm-noti7-content message">-->
+                    <!--<ul class="zm-noti7-content-item">-->
+                    <!--&lt;!&ndash;这里在js页面$scope下存进去newsrecords，newsrecords是个数组，数组中的每个数都是对象，每个对象包括两个属性，name和content。&ndash;&gt;-->
+                    <!--<li ng-repeat="news in newsrecords"><a class="author-link" href="#">{{news.name}}</a> 回答了<a class="question_link" href="#"> {{news.content}}</a></li>-->
+                    <!--</ul>-->
+                    <!--</div>-->
+
+                    <!--<div class="frame-border bottom"></div>-->
+                    <!--<div class="zm-noti7-popup-footer">-->
+                    <!--<a href="#" class="zm-noti7-popup-footer-all zg-right">查看全部 &raquo;</a>-->
+                    <!--<a href="#" class="zm-noti7-popup-footer-set" title="通知设置"><i-->
+                    <!--class="zg-icon zg-icon-settings"></i></a>-->
+                    <!--</div>-->
+                    <!--</div>-->
+                    <!--</div>-->
+                </li>
+            </ul>
+
+        </div>
+        <div class="zu-global-notify" id="zh-global-message" style="display:none">
+            <div class="top-wrap">
+                <div class="zu-global-nitify-inner">
+                    <a class="zu-global-notify-close" href="javascript:;" title="关闭" name="close">x</a> <span
+                        class="zu-global-notify-icon"></span> <span class="zu-global-notify-msg"></span></div>
+            </div>
+        </div>
+        <div class="top-nav-profile">
+            <a href="#" class="top-nav-userinfo"> <span class="name">{{fname}}</span> <img class="Avatar"
+                                                                                           src="img\QQ截图20161026125011.png"/>
+            </a>
+            <ul class="top-nav-dropdown">
+                <li class="top-nav-dropdown1">
+                    <a href="#"> <i class="zg-icon zg-icon-dd-home"></i>我的主页 </a>
+                </li>
+                <li class="top-nav-dropdown2">
+                    <a href="#"> <i class="zg-icon zg-icon-dd-pm"></i>私信 </a>
+                </li>
+                <li class="top-nav-dropdown3">
+                    <a href="#"> <i class="zg-icon zg-icon-dd-settings"></i>设置 </a>
+                </li>
+                <li class="top-nav-dropdown4" ng-click="logout()">
+                    <a href="#"> <i class="zg-icon zg-icon-dd-logout"></i>退出 </a>
+                </li>
+            </ul>
+        </div>
+        <button class="top-add-question" ng-click="ShowDiv('MyDiv','fade')">提问</button>
+        <!--弹出层时背景层DIV-->
+        <div id="fade" class="black_overlay">
+        </div>
+        <div id="MyDiv" class="white_content">
+            <div style="cursor: default; height: 40px;" id="move">
+                <span class="post_close" style="font-size: 18px;" ng-click="CloseDiv('MyDiv','fade')">×</span>
+                <h2 class="postQues">写下你的问题</h2>
+                <form style="text-align: center; ">
+                    <div class="ques-inputs">
+                        <div>
+                            <input  class="ques_title"type="text" ng-model="ques.title" placeholder="问题 标题" required>
+                        </div>
+                        <div>
+                            <textarea class="ques_content" type="text" ng-model="ques.content" placeholder="请详细的描述问题"></textarea>
+                        </div>
+                        <div>
+                            <input  class="ques_author"type="checkbox" ng-model="ques.author">匿名提问
+                        </div>
+                    </div>
+                    <div class="button-wrapper command">
+                        <button class="postques" ng-click="postQues()" type="submit">提交问题</button>
+                    </div>
+                </form>
+            </div>
+    </div>
+</div>
+<div class="bodybody">
+    <!--主体-->
+    <div ng-app="" class="contentleft">
+        <div class="maincontent" ng-repeat="x in allresults">
+            <div class="avatar">
+                <a href="#"> <img src="img/11.png" class="side-topic-avatar"> </a>
+            </div>
+            <!--  用户头像小图标区域结束-->
+            <div class="feedmain">
+                <div class="source"> 来自话题:
+                    <a href="#">计算机</a>
+                </div>
+                <div class="feedcontent">
+                    <h2 class="feed-title"><a class="question_link" href="#"> {{x.db_zhihu_ques_title}} </a></h2>
+                    <div class="entry-body">
+                        <!--  赞同数目-->
+                        <div class="zm-item-vote">
+                            <a class="zm-item-vote-count js-expand js-vote-count" href="#">{{x.appro_num}}</a>
+                        </div>
+                        <!--回答者姓名简介-->
+                        <div class="zm-item-answer-author-info">
+                            <a class="author-link" href="#">{{x.db_zhihu_user_name}}</a><span class="bio"> CS
+                    PhD@UW / <a href="#" class=" external"><span class="invisible">http://www.</span><span
+                                    class="visible">XiaoyiZhang.me</span><span class="invisible"></span><i
+                                    class="icon-external"></i></a>
+									</span>
+
+                        </div>
+                        <!--  回答内容-->
+                        <div class="zm-item-rich-text expandable">
+                            <div class="zh-summary">{{x.short}}</b>
+                                <button type="button" onClick="showdiv(this);" class="toggle-expand">显示全部</button>
+                            </div>
+                            <div class="quanwen">{{x.db_zhihu_answ_content}}</b>
+
+                                <a href="javascript:;" class="btn" onClick="hidediv(this);">收起全文</a>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="pinglun1">
+                <button type="button" ng-click="approData(x)">赞同</button>
+                <button type="button" ng-click="disscuData(x)">评论</button>
+                <button type="button" ng-click="colleData(x)">/收藏</button>
+                　评论　收藏
+            </div>
+            <!--<div class="pinglun2">赞同　评论　收藏　赞同　评论　收藏</div>-->
+        </div>
+        <!--小块结束-->
+    </div>
+    <!--全部小块-->
+    <div class="right-nav">
+        <!--右侧栏-->
+        <div class="shameimaru-section">
+            <a class="shameimaru-link"> <img src="img\v2-d68e8cedd39b82ddb7ed03cdac185201_270x225.png"/></a>
+            <a class="shameimaru-close"></a>
+        </div>
+        <div class="zm-side-nav-group">
+            <ul class="zm-side-nav">
+                <li class="zm-side-nav-li-1">
+                    <a class="zm-side-nav-link-1" href="#"> <i class="zg-icon-sidenav-fav"></i> 我的收藏</a>
+                </li>
+                <li class="zm-side-nav-li-2">
+                    <a class="zm-side-nav-link-2" href="#"> <i class="zg-icon-sidenav-follow"></i> 我关注的问题</a>
+                </li>
+                <li class="zm-side-nav-li-3">
+                    <a class="zm-side-nav-link-3" href="#"> <i class="zg-icon-sidenav-invite"></i> 邀请我回答的问题</a>
+                </li>
+            </ul>
+        </div>
+        <div class="right-border"></div>
+        <div class="zm-side-nav-group">
+            <ul class="zm-side-nav">
+                <li class="zm-side-nav-li-4">
+                    <a class="zm-side-nav-link-4" href="#"> <i class="zg-icon zg-icon-sidenav-publicedit"></i>
+                        公共编辑动态</a>
+                </li>
+                <li class="zm-side-nav-li-5">
+                    <a class="zm-side-nav-link-5" href="#"> <i class="zg-icon z-ico-community"></i> 社区服务中心</a>
+                </li>
+                <li class="zm-side-nav-li-6">
+                    <a class="zm-side-nav-link-6" href="#"> <i class="zg-icon icon-copyright"></i> 版权服务中心</a>
+                </li>
+            </ul>
+        </div>
+        <div class="right-border"></div>
+        <div class="SidebarSection">
+            <h3>知乎圆桌<a href="#" class="SidebarListNav-sideLink">查看全部</a></h3>
+            <ul class="SidebarListNav-list">
+                <li class="SidebarListNav-listItem">
+                    <a class="SidebarListNav-itemLink" href="#"> <img class="Avatar SidebarListNav-avatar"
+                                                                      src="img\QQ截图20161111140753.png"/> <span
+                            class="SidebarListNav-label"> 即使独自生活 </span> <span
+                            class="SidebarListNav-hint">还有 1 天结束</span> </a>
+                    <a class="follow-link" href="#"><i class="z-icon-follow"></i>关注圆桌</a>
+                </li>
+                <li class="SidebarListNav-listItem">
+                    <a class="SidebarListNav-itemLink" href="#"> <img class="Avatar SidebarListNav-avatar"
+                                                                      src="img\QQ截图20161111140753.png"/> <span
+                            class="SidebarListNav-label"> 即使独自生活 </span> <span
+                            class="SidebarListNav-hint">还有 1 天结束</span> </a>
+                    <a class="follow-link" href="#"><i class="z-icon-follow"></i>关注圆桌</a>
+                </li>
+                <li class="SidebarListNav-listItem">
+                    <a class="SidebarListNav-itemLink" href="#"> <img class="Avatar SidebarListNav-avatar"
+                                                                      src="img\QQ截图20161111140753.png"/> <span
+                            class="SidebarListNav-label"> 即使独自生活 </span> <span
+                            class="SidebarListNav-hint">还有 1 天结束</span> </a>
+                    <a class="follow-link" href="#"><i class="z-icon-follow"></i>关注圆桌</a>
+                </li>
+            </ul>
+        </div>
+        <div class="right-border"></div>
+    </div>
+</div>
+</body>
+<script src="javascripts/zhuye.js"></script>
+</html>

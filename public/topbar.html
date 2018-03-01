@@ -1,0 +1,48 @@
+<!--头部导航栏-->
+<div class="topbar">
+    <a ui-sref="homecontainer.main" class="topbar-logo navbar-left"></a>
+    <div class="topbar-nav navbar-left">
+        <ul class="nav nav-pills">
+            <li>
+                <a ui-sref="homecontainer.main">首页</a>
+            </li>
+            <li>
+                <a ui-sref="error">话题</a>
+            </li>
+            <li>
+                <a ui-sref="error">发现</a>
+            </li>
+            <li>
+                <a ui-sref="home.main"><span class="mobi-arrow"></span>消息</a>
+            </li>
+        </ul>
+    </div>
+    <div class="navbar-left top-search">
+        <form class="input-group top-search-form" role="search">
+            <input type="text" class="top-search-input form-control" placeholder="搜索你感兴趣的内容..."/>
+            <span class="input-group-addon glyphicon glyphicon-search" ng-click="searchData($event)"></span>
+            <!--<button type="submit" class="btn navbar-right" ng-click="searchData()"><span class="hide-text">搜索</span></button>-->
+        </form>
+
+        </button>
+    </div>
+    <button type="submit" class="btn navbar-right top-add-question" ng-click="queswindow()"><span>提问</span></button>
+    <div class="navbar-right top-nav-profile">
+        <span class="top-nav-userinfo" ng-bind="user.name"></span>
+        <ul class="top-nav-dropdown">
+            <li>
+                <a ui-sref="home.main"> <i class="glyphicon glyphicon-user"></i>  我的主页 </a>
+            </li>
+            <li>
+                <a ui-sref="home.main"> <i class="glyphicon glyphicon-envelope"></i>  私信 </a>
+            </li>
+            <li>
+                <a ui-sref="home.main"> <i class="glyphicon glyphicon-wrench"></i>  设置 </a>
+            </li>
+            <li ng-click="outLogin()">
+                <a ui-sref="index.login"> <i class="glyphicon glyphicon-off"></i>  退出 </a>
+            </li>
+        </ul>
+        </li>
+    </div>
+</div>

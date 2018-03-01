@@ -1,0 +1,19 @@
+<div class="view view-signup">
+    <form class="zu-side-login-box">
+        <div class="group-inputs">
+            <div class="user input-wrapper">
+                <input required type="text" name="fullname" ng-model="user.name" placeholder="姓名">
+            </div>
+            <div class="email input-wrapper">
+                <input required type="text" class="account" ng-model="user.phone" placeholder="手机号（仅支持中国大陆）">
+            </div>
+            <div class="input-wrapper">
+                <input required type="password" ng-model="user.password" placeholder="密码（不少于6位）">
+            </div>
+        </div>
+        <div class="button-wrapper command">
+            <button class="sign-button submit" ng-click="signupData()" type="submit">注册知乎</button>
+        </div>
+    </form>
+    <p class="agreement-tip">点击注册按钮，即代表你同意知乎协议</p>
+</div>

@@ -1,0 +1,23 @@
+<div class="index-main-body">
+    <div>
+        <div class="index-header">
+            <h1 class="logo"></h1>
+            <h2 class="subtitle">与世界分享你的知识、经验和见解</h2>
+        </div>
+        <div class="index-tab-navs">
+            <div class="navs-slider" data-active-index="1">
+                <a href="javascript:;" id="signup" ng-click="getFlag(0)">注册</a>
+                <a href="javascript:;" id="signin" ng-click="getFlag(1)">登录</a>
+                <span class='navs-slider-bar' ng-class="{true:'signin-bar',false:'signup-bar'}[isSelected]"></span>
+            </div>
+        </div>
+        <!--ng-show 指令在表达式为 true 时显示指定的 HTML 元素，否则隐藏指定的 HTML 元素。-->
+        <div ng-show="flag==='signin'">
+            <div ui-view="login"></div>
+        </div>
+        <div ng-show="flag==='signup'">
+            <div ui-view="register"></div>
+        </div>
+
+    </div>
+</div>
